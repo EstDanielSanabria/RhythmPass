@@ -11,6 +11,7 @@ TagManager:
   - Water
   - Hand
   - Instrument
+  - BPMModifier
   layers:
   - Default
   - TransparentFX

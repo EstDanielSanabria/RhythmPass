@@ -1,17 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class AuthController : MonoBehaviour
 {
     public bool havePlayed = false;
     public List<string> strings = new List<string>();
-    public bool canRecord = true;
+    public bool canRecord = false;
+    public int playsPerBeat = 0;
+
+    public TextMeshProUGUI textMeshPro;
 
     const string CONTRASENA = "GameManager-GameManager-GameManager-GameManager-GameManager-GameManager-GameManager-GameManager";
 
+    private void Start()
+    {
+        canRecord= false;
+    }
+
     private void Update()
     {
+        textMeshPro.text = string.Join("-", strings);
         if (strings.Count == 8 && canRecord)
         {
             canRecord = false;

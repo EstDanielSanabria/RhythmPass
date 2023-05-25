@@ -23,11 +23,11 @@ public class DetectCollision : MonoBehaviour
         if (other.gameObject.CompareTag("Hand") && other.gameObject.transform.position.y > basePosition.y)
         {
             AudioSource audioSource = GetComponent<AudioSource>();
-            if (audioSource != null && audioSource.clip != null && !controller.havePlayed && controller.canRecord)
+            if (audioSource != null && audioSource.clip != null && controller.canRecord)
             {
                 audioSource.PlayOneShot(audioSource.clip);
                 double width = indicator.GetComponent<Renderer>().bounds.size.x;
-                Vector3 position = new Vector3((float)((width + 0.1) * center.childCount), 2, 5);
+                Vector3 position = new Vector3(1 - (float)((width + 0.1) * center.childCount), 2, 3);
                 Instantiate(
                     indicator,
                     position,
@@ -35,7 +35,7 @@ public class DetectCollision : MonoBehaviour
                     center
                 );
                 controller.strings.Add(gameObject.name);
-                controller.havePlayed = true;
+                controller.playsPerBeat++;
             }
         }
     }
