@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,6 +8,9 @@ public class DragAndDrop : MonoBehaviour
 {
     [SerializeField]
     private XRNode xRNode = XRNode.LeftHand;
+
+    [SerializeField]
+    private AuthController authController;
 
     private List<InputDevice> inputDevices = new List<InputDevice>();
 
@@ -34,6 +36,7 @@ public class DragAndDrop : MonoBehaviour
         lineRenderer= gameObject.GetComponent<LineRenderer>();
         interactorLineVisual = gameObject.GetComponent<XRInteractorLineVisual>();
         audioSource= gameObject.GetComponent<AudioSource>();
+        authController = GameObject.Find("GameManager").GetComponent<AuthController>();
     }
 
     private void OnEnable()
@@ -66,7 +69,7 @@ public class DragAndDrop : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
                 {
-                    if (hit.collider.gameObject.CompareTag("BPMModifier"))
+                    if (hit.collider.gameObject.CompareTag("BPMModifier") && !authController.canRecord)
                     {
                         bpmModifierTransform.SetParent(transform);
                     }
@@ -88,7 +91,5 @@ public class DragAndDrop : MonoBehaviour
                 bpmModifierTransform.position = new Vector3(10, 1, 10);
             if (bpmModifierTransform.transform.position.y > 3)
                 bpmModifierTransform.position = new Vector3(10, 3, 10);
-
-
     }
 }

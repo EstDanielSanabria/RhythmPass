@@ -46,7 +46,7 @@ public class Metronomo : MonoBehaviour
         }
     }
 
-    private void CalculateBeatInterval()
+    public void CalculateBeatInterval()
     {
         beatInterval = 60f / bpm;
     }
@@ -65,4 +65,5 @@ public class Metronomo : MonoBehaviour
     {
         nextBeatTime= Time.time + 2*beatInterval;
     }
+
 }
